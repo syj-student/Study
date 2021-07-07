@@ -30,14 +30,14 @@ while q:
 			graph[cx][cy] = graph[x][y] + 1
 
 # search answer
-max = 0
+max = graph[0][0]
 flag = True
 for i in range(n):
 	for j in range(m):
 		if graph[i][j] == 0:
 			print(-1)
 			flag = False
-			break
+			exit()
 		elif graph[i][j] > max:
 			max = graph[i][j]
 if flag:

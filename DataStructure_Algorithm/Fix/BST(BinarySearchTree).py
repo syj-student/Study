@@ -64,7 +64,6 @@ class	Tree:
 		else:
 			self.__pre_order(node.left)
 		if node.right == None:
-			pass
 		else:
 			self.__pre_order(node.right)
 
@@ -98,7 +97,7 @@ class	Tree:
 		elif num == 2:
 			self.__post_order(self.root)
 
-	#def delete(self, del_key):
+	# def delete(self, del_key):
 
 	def max_of_tree(self):
 		print(self.max)
@@ -122,3 +121,7 @@ print()
 bst.max_of_tree()
 bst.min_of_tree()
 bst.tree_height()
+
+# search() true false
+# while 재작성
+# del 작성
