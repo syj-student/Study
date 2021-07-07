@@ -8,7 +8,7 @@ print(f'Before : {ret}')
 
 # Select Sort
 length = len(ret)
-for i in range(length):
+for i in range(length - 1):
 	ret_min = i
 	for j in range(i + 1, length):
 		if ret[j] < ret[ret_min]:

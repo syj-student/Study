@@ -4,4 +4,6 @@ import random
 ret = list()
 for __ in range(10):
 	ret.append(random.randrange(-100, 101))
-print(ret)
+print(f'Before : {ret}')
+
+# Binary Insertion Sort

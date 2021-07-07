@@ -29,7 +29,7 @@ while q:
 			q.append((cx, cy))
 			graph[cx][cy] = graph[x][y] + 1
 
-# search answer
+# print answer
 max = graph[0][0]
 flag = True
 for i in range(n):
