@@ -12,6 +12,6 @@ length = len(ret)
 for i in range(1, length):
 	for j in range(i):
 		if ret[j] > ret[i]:
-			ret.insert(j, ret.pop(i))
+			ret[i], ret[j] = ret[j], ret[i]
 			break
 print(f'After  : {ret}')
