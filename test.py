@@ -1,4 +1,6 @@
 from collections import deque
-a = [1]
-a.insert(0, 2)
-print(a)
+import sys
+
+a = [1, 2]
+
+print(a[-1])
