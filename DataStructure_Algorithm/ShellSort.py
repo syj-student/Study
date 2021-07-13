@@ -3,7 +3,7 @@ import copy
 
 # make random list
 ret = list()
-for __ in range(10):
+for __ in range(1000):
 	ret.append(random.randrange(-100, 101))
 print(f'Before : {ret}')
 

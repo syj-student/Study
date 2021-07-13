@@ -64,6 +64,7 @@ class	Tree:
 		else:
 			self.__pre_order(node.left)
 		if node.right == None:
+			pass
 		else:
 			self.__pre_order(node.right)
 

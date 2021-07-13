@@ -1,14 +1,9 @@
-def cut(lst, num):
-	print(id(lst))
-	if lst[0] < num < lst[1]:
-		print("in")
-		print("in", id(lst[0]))
-		lst[0] = [lst[0], num]
-		print("in", id(lst[0]))
-		print("in")
+pre_order = []
+while 1:
+    try:
+        pre_order.append(int(input()))
+    # try에서 예외 발생시 break 실행
+    except:
+        break
 
-a = [1, 4]
-print(id(a[0]))
-cut(a, 2)
-print(id(a[0]))
-print(a)
+print(pre_order)
