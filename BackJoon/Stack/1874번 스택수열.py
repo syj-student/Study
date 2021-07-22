@@ -1,6 +1,4 @@
 import sys
-
-
 n = int(input())
 stack = list()
 ret = list()
