@@ -36,7 +36,6 @@ int	main(void)
 	int n;
 	int ret = 0;
 
-	printf("%ld\n", sizeof(g_answer[0]));
 	scanf("%d", &n);
 	dfs(n, 0, &ret);
 	printf("%d", ret);

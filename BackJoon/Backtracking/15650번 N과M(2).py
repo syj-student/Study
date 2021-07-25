@@ -21,6 +21,5 @@ def dfs(n, depth, m):
 
 # print
 dfs(n, 0, m)
-
 for i in sorted(list(answer)):
 	print(*i)
