@@ -1,44 +1,43 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-int g_answer[15];
-int g_check[15];
+#define cnt 500000
 
-int	check(int depth)
+void	CountingSort(int *lst)
 {
-	for (int i = 0; i < depth; i++)
-		if (g_answer[i] - g_answer[depth] == depth - i || g_answer[depth] - g_answer[i] == depth - i)
-			return 0;
-	return 1;
-}
-
-void	dfs(int n,int depth, int *ret)
-{
-	if (depth == n)
+	// counting
+	static int lstmax[cnt];
+	for (int i = 0; i < cnt; i++)
+		(lstmax[lst[i]])++;
+	for (int i = 1; i < cnt; i++)
+		lstmax[i] = lstmax[i] + lstmax[i - 1];
+	
+	// sorting
+	int ret[cnt];
+	for (int i = 0; i < cnt; i++)
 	{
-		(*ret)++;
-		return ;
+		ret[lstmax[lst[i]] - 1] = lst[i];
+		(lstmax[lst[i]])--;
 	}
-	for (int i = 0; i < n ;i++)
-	{
-		if (!(g_check[i]))
-		{
-			g_check[i] = 1;
-			g_answer[depth] = i;
-			if (check(depth))
-				dfs(n, depth + 1, ret);
-			g_check[i] = 0;
-		}
-	}
+	for (int i = 0; i < cnt; i++)
+		lst[i] = ret[i];
 }
 
 int	main(void)
 {
-	int n;
-	int ret = 0;
+	// make random
+	int random[cnt];
+	srand(time(NULL));
+	for (int i = 0; i < cnt; i++)
+		random[i] = rand() % cnt;
 
-	printf("%ld\n", sizeof(g_answer[0]));
-	scanf("%d", &n);
-	dfs(n, 0, &ret);
-	printf("%d", ret);
+	// sorting
+	CountingSort(random);
+
+	// print
+	for (int i = 0; i < cnt; i++)
+		printf("%d ", random[i]);
+	printf("\n");
 	return 0;
 }
