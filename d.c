@@ -2,6 +2,6 @@
 
 int	main(void)
 {
-	for (int i = 0; i < 100; i += 30)
-		printf("%d\n", i);
+	unsigned char a = 255;
+	printf("%d\n", a);
 }
