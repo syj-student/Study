@@ -1,5 +1,4 @@
-import sys
-
-a = pop
-lst = [10]
-print(lst.a())
+c = -40
+print(c // 6)
+print(c % 6)
+print(-(-c // 6))
