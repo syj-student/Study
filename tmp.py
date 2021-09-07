@@ -1,3 +1,7 @@
-import sys
+import collections
 
-print(sys.maxsize)
+deq = collections.deque()
+
+if deq:
+	print("empty")
+else
