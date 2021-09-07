@@ -1,2 +1,3 @@
-for i, j in range(10):
-	print(i, j)
+import sys
+
+print(sys.maxsize)

@@ -11,9 +11,6 @@ class Solution:
 			nums_left.append(nums_left[-1] * nums[i])
 			nums_right.appendleft(nums_right[0] * nums[j])
 			j -= 1
-		#print(nums_left, sep=' ')
-		#print()
-		#print(nums_right, sep= ' ')
 		for i in range(len(nums)):
 			ret.append(nums_left[i] * nums_right[i + 1])
 		return ret
