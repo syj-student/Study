@@ -9,35 +9,29 @@ class ListNode:
 class Solution:
 	def __append(self, head, val):
 		data = ListNode(val)
+		ret = head
 		if not head:
-			head = data
-			return
+			return data
 		while head.next:
 			head = head.next
 		head.next = data
-		print(head)
+		return ret
 
 	def mergeTwoLists(self, l1, l2):
 		ret = None
-		while l1 and l2:
+		while l1 or l2:
 			if not l1 or l1.val >= l2.val:
-				self.__append(ret, l2.val)
-				#print(ret.val)
+				ret = self.__append(ret, l2.val)
 				l2 = l2.next
 			else:
-				self.__append(ret, l1.val)
-				#print(ret.val)
+				ret = self.__append(ret, l1.val)
 				l1 = l1.next
-		#while l2:
-		#	self.__append(ret, l2.val)
-		#	l2 = l2.next
-		#while l1:
-		#	self.__append(ret, l1.val)
-		#	l1 = l1.next
-		return None
+		return ret
 
 l1 = ListNode(10)
 l2 = ListNode(20)
 sol = Solution()
 tmp = sol.mergeTwoLists(l1, l2)
-print(tmp)
+while tmp:
+	print(tmp.val)
+	tmp = tmp.next
