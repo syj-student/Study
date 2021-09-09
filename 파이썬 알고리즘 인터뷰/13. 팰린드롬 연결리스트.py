@@ -8,7 +8,10 @@ class Solution:
 		while head:
 			deque.append(head.val)
 			head = head.next
-		while len(deque) > 1:
-			if deque.popleft() != deque.pop():
-				return False
+		while deque:
+			try:
+				if deque.popleft() != deque.pop():
+					return False
+			except:
+				return True
 		return True
