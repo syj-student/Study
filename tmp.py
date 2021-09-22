@@ -1,2 +1,2 @@
-a = list(map(int, reversed(10)))
-print(a)
+for i in range(5):
+	print(i)
