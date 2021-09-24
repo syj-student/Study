@@ -8,7 +8,15 @@
 
 class Solution:
 	def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
-		answer, startNode = head, None
-		for i in range(1, left):
+		answer = head
+		for _ in range(1, left):
 			head  = head.next
+		startNode = head
+		valueBuffer = list()
+		for _ in range(right - left + 1):
+			valueBuffer.append(head.val)
+			head = head.next
+		for _ in range(right - left):
+			startNode.val = valueBuffer.pop()
+			startNode = startNode.next
 		return answer

@@ -1,2 +1,3 @@
-for i in range(5):
-	print(i)
+if 'a' < 'c':
+	print('good')
+print('-------')
