@@ -1,3 +1,2 @@
-if 'a' < 'c':
-	print('good')
-print('-------')
+a = []
+print(a[-1])
