@@ -12,6 +12,9 @@ class Solution:
 
 		while Q:
 			node = Q.popleft()
-
-			node.left, node.right = node.right, node.left
-			
+			if node:
+				node.left, node.right = node.right, node.left
+				Q.append(node.left)
+				Q.append(node.right)
+		
+		return root
