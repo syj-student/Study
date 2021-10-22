@@ -8,4 +8,13 @@
 #         self.right = right
 class Solution:
 	def isBalanced(self, root: Optional[TreeNode]) -> bool:
-		max_depth = 0
+		def dfs(root):
+			if root is None:
+				return 0
+			left = dfs(root.left)
+			right = dfs(root.right)
+			if abs(left - right) > 1 or left == -1 or right == -1:
+				return -1
+			return max(left, right) + 1
+		return dfs(root) != -1
+
