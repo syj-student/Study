@@ -8,4 +8,4 @@
 #         self.right = right
 class Solution:
 	def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
-		
+		root
