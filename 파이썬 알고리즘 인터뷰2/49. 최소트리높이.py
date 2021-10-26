@@ -4,7 +4,8 @@ import collections
 class Solution:
 	def findMinHeightTrees(self, n, edges):
 		if n <= 1:
-			return edges[0]
+			print(n, edges)
+			return [0]
 		graph_map = collections.defaultdict(list)
 		for f, t in edges:
 			graph_map[f].append(t)
