@@ -7,9 +7,13 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-	def bstInsert(val):
-		
 	def sortedArrayToBST(self, nums: List[int]) -> Optional[TreeNode]:
-		mid = len(nums) // 2
-		left_nums = nums[:mid]
-		right_nums = nums[mid:]
+		def dfs(nums_list):
+			if not nums_list:
+				return
+			mid = len(nums_list) // 2
+			node = TreeNode(nums_list[mid])
+			node.left = dfs(nums_list[:mid])
+			node.right = dfs(nums_list[mid + 1:])
+			return node
+		return dfs(nums)
