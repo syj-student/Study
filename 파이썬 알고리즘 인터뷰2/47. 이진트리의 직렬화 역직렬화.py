@@ -1,64 +1,34 @@
-# https://leetcode.com/problems/serialize-and-deserialize-binary-tree/
-
-# Definition for a binary tree node.
-# class TreeNode(object):
-#     def __init__(self, x):
-#         self.val = x
-#         self.left = None
-#         self.right = None
-
 class Codec:
-
+	
 	def serialize(self, root):
-		stack = collections.deque()
-		Q = collections.deque([root])
-		while Q:
-			node = Q.popleft()
+		q = collections.deque([root])
+		result = ['#']
+		while q:
+			node = q.popleft()
 			if node:
-				stack.append(node.val)
-				if node.left:
-					Q.append(node.left)
-				else:
-					Q.append(None)
-				if node.right:
-					Q.append(node.right)
-				else:
-					Q.append(None)
+				q.append(node.left)
+				q.append(node.right)
+				result.append(str(node.val))
 			else:
-				stack.append(None)
-		return stack
-		"""Encodes a tree to a single string.
-
-		:type root: TreeNode
-		:rtype: str
-		"""
-
+				result.append('#')
+		return ' '.join(result)
+		
 
 	def deserialize(self, data):
-		print("dkafkjdafdfamk")
-		print(data, "Hello world")
-		root = TreeNode(data.popleft())
-		Q = collections.deque([root])
-		while data:
-			node = Q.popleft()
-			tmp = data.popleft()
-			if tmp:
-				node.left = TreeNode(tmp)
-				Q.append(node.left)
-			tmp = data.popleft()
-			if tmp:
-				node.right = TreeNode(tmp)
-				Q.append(node.right)
-
+		if data == '# #':
+			return None
+		nodes = data.split()
+		root = TreeNode(int(nodes[1]))
+		q = collections.deque([root])
+		idx = 2
+		while q:
+			node = q.popleft()
+			if nodes[idx] is not '#':
+				node.left = TreeNode(int(nodes[idx]))
+				q.append(node.left)
+			idx += 1
+			if nodes[idx] is not '#':
+				node.right = TreeNode(int(nodes[idx]))
+				q.append(node.right)
+			idx += 1
 		return root
-		"""Decodes your encoded data to tree.
-
-		:type data: str
-		:rtype: TreeNode
-		"""
-
-
-# Your Codec object will be instantiated and called as such:
-# ser = Codec()
-# deser = Codec()
-# ans = deser.deserialize(ser.serialize(root))
