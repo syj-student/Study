@@ -2,13 +2,13 @@
 import collections
 class Solution:
 	def largestNumber(self, nums) -> str:
-		nums_dict = collections.defaultdict(list)
-		for num in nums:
-			nums_dict[len(str(num))].append(num)
+		def swap(a, b):
+			a, b = str(a), str(b)
+			return a + b if int(a + b) > int(b + a) else b + a
 		answer = ''
-		for key in sorted(nums_dict.keys(), reverse=True):
-			answer += ''.join(map(str, sorted(nums_dict[key], reverse=True)))
-		return answer
+		for i in nums:
+			answer = swap(answer, i)
+		return str(int(answer))
 
 a = Solution()
 print(a.largestNumber([10, 11, 2]))
