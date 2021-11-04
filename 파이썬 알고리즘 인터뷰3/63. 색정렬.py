@@ -8,8 +8,8 @@ class Solution:
 				nums[a], nums[b] = nums[b], nums[a]
 				a, b = a + 1, b + 1
 			elif nums[b] > 1:
-				nums[b], nums[c] = nums[c], nums[b]
 				c = c - 1
+				nums[b], nums[c] = nums[c], nums[b]
 			else:
 				b = b + 1
 
