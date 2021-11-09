@@ -5,7 +5,15 @@ import collections
 
 class Solution:
 	def characterReplacement(self, s, k):
-		counter = collections.Counter()
+		counts = collections.Counter()
+		left = 0
+		for right in range(1, len(s)+1):
+			counts[s[right-1]] += 1
+			max_char_n = counts.most_common(1)[0][1]
+			if right - left - max_char_n > k:
+					counts[s[left]] -= 1
+					left += 1
+		return right - left
 
 a = Solution()
-a.characterReplacement(1, 2)
+print(a.characterReplacement("AAAAAAACCdfgfdsgsggsgqetnfmfmmtreCACABBCCAA", 2))
