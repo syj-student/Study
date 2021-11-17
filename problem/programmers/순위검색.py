@@ -10,15 +10,19 @@ def solution(info, query):
 	def insert(root, cand, score):
 		for c in cand:
 			root = root.next_node[c]
-		root.score.append(score)
+		idx = bisect.bisect_left(root.score, score)
+		if idx == -1:
+			root.score.append(score)
+		else:
+			root.score.insert(idx, score)
 
-
+		
 	def getcnt(root, cand, score, i=0):
 		if i == len(cand):
-			root.score.sort()
 			num = bisect.bisect_left(root.score, score)
 			if num != -1:
 				return len(root.score) - num
+			return 0
 		cnt = 0
 		if cand[i] == '-':
 			for c in root.next_node.keys():
