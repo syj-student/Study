@@ -5,11 +5,12 @@ def solution(n, computers):
 		if visited[i]:
 			continue
 		stack = [i]
+		visited[i] = True
 		while stack:
 			node = stack.pop()
-			visited[node] = True
 			for j in range(n):
 				if computers[node][j] and visited[j] == False:
+					visited[j] = True
 					stack.append(j)
 		answer += 1
 	return answer
