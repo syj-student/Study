@@ -1,6 +1,12 @@
-import itertools
+#Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+def test(head):
+    head.val = 10
 
-a = 'abc'
-
-for i in itertools.permutations(a, 3):
-    print(''.join(i))
+a = ListNode()
+print(a.val)
+test(a)
+print(a.val)
