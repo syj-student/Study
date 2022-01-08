@@ -4,20 +4,13 @@ num = int(sys.stdin.readline())
 
 
 def range_prime(n):
-    stack = list()
-
-    def check(no):
-        end = int(no**0.5)
-        for x in stack:
-            if x > end:
-                break
-            if no % x == 0:
-                return
-        stack.append(no)
-
-    for j in range(2, n + 1):
-        check(j)
-    return stack
+    m = int(n ** 0.5) + 1
+    s = [1] * (n + 1)
+    for i in range(2, m):
+        if s[i] == 1:
+            for j in range(i + i, n + 1, i):
+                s[j] = 0
+    return [i for i in range(2, n + 1) if s[i] == 1]
 
 
 left, answer, acc = 0, 0, 0
