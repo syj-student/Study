@@ -1,2 +1,4 @@
-a = [1]
-a.remove(20)
+def a():
+	return print("YES")
+
+print(a())
