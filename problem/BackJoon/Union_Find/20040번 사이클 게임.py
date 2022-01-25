@@ -1,29 +1,29 @@
 import sys
-sys.setrecursionlimit(10 ** 9)
+input = sys.stdin.readline
 
-def check_union(x):
-	if x == table[x]:
-		return x
-	return check_union(table[x])
 
-def insert_union_index(a, b):
-	a = check_union(a)
-	b = check_union(b)
-	if a == b:
+def union(x,y):
+	x = find(x)
+	y = find(y)
+	if x == y:
 		return True
-	elif a < b:
-		table[a] = b
+	if x < y:
+		parents[y] = x
 	else:
-		table[b] = a
+		parents[x] = y
 	return False
 
+def find(k):
+	while k != parents[k]:
+		k = parents[k]
+	return k
 
-n, m = map(int, sys.stdin.readline().split())
-table = [i for i in  range(n)]
+n,m = map(int,input().split())
+parents = [i for i in range(n+1)]
 for i in range(m):
-	a, b = map(int, sys.stdin.readline().split())
-	if insert_union_index(a, b):
+	a,b = map(int,input().split())
+	if union(a, b):
 		print(i+1)
 		break
-if i == m-1:
+else:
 	print(0)

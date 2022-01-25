@@ -1,29 +1,29 @@
 import sys
 input = sys.stdin.readline
 
-n, m = map(int, input().split())
-parents = [i for i in range(n)]
-endgame = 0
 
-def find(x):
-    if x == parents[x]:
-        return x
-    else:
-        y = find(parents[x])
-        parents[x] = y
-        return y
-
-def union(x, y, indx):
-    global endgame
+def union(x,y):
     x = find(x)
     y = find(y)
-    if x != y:
-        parents[max(x,y)] = min(x,y)
-    elif endgame == 0:
-        endgame = indx
+    if x == y:
+        return True
+    if x < y:
+        parents[y] = x
+    else:
+        parents[x] = y
+    return False
 
+def find(k):
+    while k != parents[k]:
+        k = parents[k]
+    return k
+
+n,m = map(int,input().split())
+parents = [i for i in range(n+1)]
 for i in range(m):
-    a, b = map(int, input().split())
-    union(a, b, i + 1)
-
-print(endgame)
+    a,b = map(int,input().split())
+    if union(a, b):
+        print(i+1)
+        break
+else:
+    print(0)
