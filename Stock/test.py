@@ -1,8 +1,2 @@
-from collections import deque
-from enum import Enum
-
-a = [1, 2, 3, 4]
-b = ['a', 'b', 'c', 'd']
-
-print(sorted(a, reverse=True))
-print(a)
+test = 'aknfakfn0000adsfafa0asdgdsg0000'
+print(test.split('0'))
