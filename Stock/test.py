@@ -1,2 +1,4 @@
-test = 'aknfakfn0000adsfafa0asdgdsg0000'
-print(test.split('0'))
+a = 5
+b = [a]
+a = 9
+print(b)
