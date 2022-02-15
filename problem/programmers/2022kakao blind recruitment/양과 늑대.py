@@ -11,17 +11,16 @@ def solution(info, edges):
     stack = [[0, 0, 0, set()]]
     while stack:
         now, s, w, visited = stack.pop()
-        if now not in visited:
-            visited.add(now)
-            if info[now]:
-                w += 1
-            else:
-                s += 1
-            if s <= w:
-                continue
-            for v in visited:
-                for c in tree[v]:
-                    if c not in visited:
-                        stack.append([c, ])
+        visited.add(now)
+        if info[now]:
+            w += 1
+        else:
+            s += 1
+        if s <= w:
+            continue
+        for v in visited:
+            for c in tree[v]:
+                if c not in visited:
+                    stack.append([c, s, w, copy.deepcopy(visited)])
 
     return sheep
