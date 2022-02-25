@@ -8,7 +8,7 @@ for _ in range(i):
 
 def checker(n):
     n = int(n)
-    r = int(n ** 0.5)
+    r = int(n**0.5)
     if r * r == n:
         return True
     return False
@@ -21,7 +21,7 @@ for x in range(i):
             for dy in range(-j, j):
                 if dx == 0 and dy == 0:
                     continue
-                no = ''
+                no = ""
                 tx = x
                 ty = y
                 while 0 <= tx < i and 0 <= ty < j:
