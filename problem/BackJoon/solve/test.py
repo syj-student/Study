@@ -1,6 +1,2 @@
-import itertools
-import sys
-
-lst = [i for i in range(10)]
-con = itertools.permutations(lst, 10)
-print(sys.getsizeof(con))
+a = set([1])
+a.remove(2)
