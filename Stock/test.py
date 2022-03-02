@@ -1,7 +1,16 @@
-from re import A
+class TestP:
+    def notest(self):
+        print("notest")
+
+    def __test(self):
+        print('yestest')
 
 
-a = 10
+class TestC(TestP):
+    def __init__(self):
+        self.name = "yusong"
 
-a += a
-print(a)
+
+a = TestC()
+a.notest()
+a.__test()
