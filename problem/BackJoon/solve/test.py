@@ -1,4 +1,5 @@
-from itertools import product
-
-a = [1, 2, 3]
-print(*product(a, 2))
+for i in range(10):
+    if i == 1:
+        continue
+else:
+    print('else')
