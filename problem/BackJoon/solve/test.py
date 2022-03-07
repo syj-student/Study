@@ -1,5 +1,3 @@
-for i in range(10):
-    if i == 1:
-        continue
-else:
-    print('else')
+a = [1, 2, 3]
+print(a + [4])
+print(a + [5])
