@@ -17,3 +17,6 @@ while stack:
         heapq.heappush(stack, (step + 1, now*2, his + [now*2]))
 print(answer[0])
 print(*answer[1])
+
+# a, b = map(int, input().split())
+# dp = [False] * (b + 1)
