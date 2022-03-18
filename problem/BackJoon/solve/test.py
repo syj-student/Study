@@ -1,3 +1,3 @@
-a = [1, 2, 3]
-print(a + [4])
-print(a + [5])
+tmp = 10
+op = '+'
+print(eval(f'tmp {op} 10'))
