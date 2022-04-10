@@ -1,16 +1,5 @@
-class TestP:
-    def notest(self):
-        print("notest")
+from pprint import pprint
 
-    def __test(self):
-        print('yestest')
-
-
-class TestC(TestP):
-    def __init__(self):
-        self.name = "yusong"
-
-
-a = TestC()
-a.notest()
-a.__test()
+a = [([0] * 10) for _ in range(10)]
+a[0][0] = 1
+pprint(a)
