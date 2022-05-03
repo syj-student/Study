@@ -1,3 +1,2 @@
-tmp = 10
-op = '+'
-print(eval(f'tmp {op} 10'))
+lst = [1, 2, 3]
+print(min(lst))
