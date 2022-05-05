@@ -1,2 +1,4 @@
-lst = [1, 2, 3]
-print(min(lst))
+table = dict()
+table['A'] = 10
+if not table['10']:
+	print("NO")
