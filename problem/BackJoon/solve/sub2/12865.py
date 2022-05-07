@@ -10,4 +10,3 @@ for i in range(1,N+1):
       dp[i][j]=max(dp[i-1][j],dp[i-1][j-lst[i-1][0]]+lst[i-1][1])
 
 print(dp[-1][-1])
-print(*dp, sep="\n")

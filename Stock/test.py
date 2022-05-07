@@ -1,5 +1,4 @@
-from pprint import pprint
+n = 6
+t = [[float('inf')] * (n+1) for _ in range(n+1)] 
 
-a = [([0] * 10) for _ in range(10)]
-a[0][0] = 1
-pprint(a)
+print(*t, sep="\n")

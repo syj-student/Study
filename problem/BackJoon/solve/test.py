@@ -1,4 +1,3 @@
-table = dict()
-table['A'] = 10
-if not table['10']:
-	print("NO")
+import sys
+
+print(sys.getsizeof(float('inf')), sys.getsizeof(sys.maxsize))
