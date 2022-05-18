@@ -1,6 +1,4 @@
-import heapq
+from pprint import pprint
 
-t = [5, 4, 3, 2, 1]
-heapq.heapify(t)
-heapq.heappop(t)
-print(t)
+visited = [[False] * 6 for _ in range(12)]
+pprint(visited)
