@@ -1,4 +1,29 @@
-from pprint import pprint
+INF = int(1e9)
 
-visited = [[False] * 6 for _ in range(12)]
-pprint(visited)
+N, M, R = map(int, input().split())
+area_item = list(map(int, input().split()))
+arr = [[INF] * N for _ in range(N)]
+
+for _ in range(R):
+    start, end, dist = map(int, input().split())
+    arr[start-1][end-1] = min(arr[start-1][end-1], dist)
+    arr[end-1][start-1] = min(arr[end-1][start-1], dist)
+
+for k in range(N):
+    for a in range(N):
+        for b in range(N):
+            arr[a][b] = min(arr[a][b], arr[a][k] + arr[k][b])
+            if a == b:
+                arr[a][b] = 0
+
+max_value = 0
+
+for i in range(N):
+    temp_value = 0
+    for j in range(N):
+        if arr[i][j] <= M:
+            temp_value += area_item[j]
+
+    max_value = max(max_value, temp_value)
+print(*arr, sep="\n")
+print(max_value)
