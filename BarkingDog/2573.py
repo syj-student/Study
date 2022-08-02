@@ -38,6 +38,7 @@ def check_map():
                 nk = dk + k
                 nz = dz + z
                 if 0 <= nk < x and 0 <= nz < y and not visited[nk][nz] and m[nk][nz] != 0:
+                    visited[nk][nz] = True
                     dq.append((nk, nz))
         return 1
     
