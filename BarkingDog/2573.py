@@ -7,24 +7,6 @@ x, y = map(int, input().split())
 m = list()
 for _ in range(x):
     m.append(list(map(int, input().split())))
-def remake_m():
-    max_x, min_x, max_y, min_y = 0, x-1, 0, y-1
-    new_m = list()
-    for i in range(x):
-        for j in range(y):
-            if m[i][j] != 0:
-                max_x = max(max_x, i)
-                min_x = min(min_x, i)
-                max_y = max(max_y, j)
-                min_y = min(min_y, j)
-    min_x = min_x if min_x - 1 < 0 else min_x - 1
-    max_x = max_x if max_x + 1 < x else max_x + 1
-    min_y = min_y if min_y - 1 < 0 else min_y - 1
-    max_y = max_y if max_y + 1 < y else max_y + 1
-    for new_x in range(min_x, max_x+1):
-        new_m.append(m[new_x][min_y:max_y+1])
-    return (len(new_m), len(new_m[0]), new_m)
-x, y, m = remake_m()
 
 def check_map():
     visited = [[False] * y for _ in range(x)]
