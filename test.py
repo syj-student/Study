@@ -1,1 +1,1 @@
-print(True == 10)
+print()
