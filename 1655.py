@@ -1,25 +1,22 @@
 import sys
-from collections import deque
-import bisect
+import heapq
 
 input = sys.stdin.readline
-lst = deque()
 
-def print_answer():
-    l = len(lst)
-    mid = l // 2
-    if l % 2:
-        return mid
-    else:
-        return mid if lst[mid] < lst[mid-1] else mid - 1
+left_heap = list()
+right_heap = list()
 
 n = int(input())
-answer = [0] * n
-lst.append(int(input()))
-answer[0] = lst[0]
-for k in range(1, n):
+for _ in range(n):
     x = int(input())
-    idx = bisect.bisect_left(lst, x)
-    lst.insert(idx, x)
-    answer[k] = lst[print_answer()]
-print(*answer, sep="\n")
+    if len(left_heap) == len(right_heap):
+        heapq.heappush(left_heap, -x)
+    else:
+        heapq.heappush(right_heap, x)
+
+    if right_heap and -left_heap[0] > right_heap[0]:
+        a, b = -heapq.heappop(left_heap), -heapq.heappop(right_heap)
+        heapq.heappush(left_heap, b)
+        heapq.heappush(right_heap, a)
+    
+    print(-left_heap[0])
