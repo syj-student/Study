@@ -3,6 +3,7 @@ import heapq
 
 def solution(n, paths, gates, summits):
     def low_way():
+        smallest = float('inf')
         heap = [(0, i, i) for i in summits]
         answer = [0, float('inf')]
         visited = [False] * (n+1)
@@ -15,9 +16,10 @@ def solution(n, paths, gates, summits):
                     if next_node in gates:
                         if tmp < answer[1]:
                             answer = [f, tmp]
+                            smallest = tmp
                         elif tmp == answer[1] and f < answer[0]:
                             answer[0] = f
-                    if not visited[next_node]:
+                    if not visited[next_node] and tmp <= smallest:
                         heapq.heappush(heap, (tmp, next_node, f))
         return answer
 
@@ -27,12 +29,3 @@ def solution(n, paths, gates, summits):
         m[a].append((c, b))
         m[b].append((c, a))
     return low_way()
-
-print(solution(6, [[1, 2, 3], [2, 3, 5], [2, 4, 2], [2, 5, 4], [3, 4, 4], [4, 5, 3], [4, 6, 1], [5, 6, 1]], [1, 3], [5]))
-print(solution(
-    7,
-    [[1, 4, 4], [1, 6, 1], [1, 7, 3], [2, 5, 2], [3, 7, 4], [5, 6, 6]],
-    [1],
-    [2, 3, 4]
-
-))
