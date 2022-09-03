@@ -1,26 +1,32 @@
-import heapq
+from collections import deque
+from copy import deepcopy
 
-def solution(alp, cop, problems):
-    problems = list(map(tuple, problems))
+def solution(n, info):
+    ret_gap = 0
+    ret = [-1]
+    info.reverse()
+    def dfs(answer = [0]*11, start=0, depth=0, info=info):
+        nonlocal ret_gap, ret
+        if depth == n:
+            ryon = pitch = 0
+            for i in range(11):
+                if answer[i] != 0 or info[i] != 0:
+                    s = answer[i] - info[i]
+                    if s > 0:
+                        ryon += i
+                    else:
+                        pitch += i
+            gap = ryon - pitch
+            if ret_gap < gap:
+                ret_gap = gap
+                ret = deepcopy(answer)
+            return
+        for i in range(start, 11):
+            answer[i] += 1
+            dfs(answer, i, depth+1, info)
+            answer[i] -= 1
+    dfs()
+    ret.reverse()
+    return ret
 
-    def check(a, c):
-        for p in problems:
-            if not (p[0] <= a and p[1] <= c):
-                return False
-        return True
-
-    heap = [(0, alp, cop)]
-    while heap:
-        t, now_alp, now_cop = heapq.heappop(heap)
-        if check(now_alp, now_cop):
-            return t
-        heapq.heappush(heap, (t+1, now_alp+1, now_cop))
-        heapq.heappush(heap, (t+1, now_alp, now_cop+1))
-        for p in problems:
-            if now_alp <= p[0] and now_cop <= p[1]:
-                heapq.heappush(heap, (t+p[4], now_alp+p[2], now_cop+p[3]))
-
-print(solution(
-    10, 10,
-    [[10,15,2,1,2],[20,20,3,3,4]]
-))
+print(solution(5, [2,1,1,1,0,0,0,0,0,0,0]))
