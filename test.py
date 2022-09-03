@@ -1,38 +1,26 @@
-from collections import defaultdict, deque
 import heapq
 
-def solution(n, paths, gates, summits):
-    def low_way():
-        heap = [(0, i, i) for i in summits]
-        answer = [0, float('inf')]
-        visited = [False] * (n+1)
-        while heap:
-            ity, now, f = heapq.heappop(heap)
-            if not visited[now]:
-                visited[now] = True
-                for next_cost, next_node in m[now]:
-                    tmp = max(next_cost, ity)
-                    if next_node in gates:
-                        if tmp < answer[1]:
-                            answer = [f, tmp]
-                        elif tmp == answer[1] and f < answer[0]:
-                            answer[0] = f
-                    if not visited[next_node]:
-                        heapq.heappush(heap, (tmp, next_node, f))
-        return answer
+def solution(alp, cop, problems):
+    problems = list(map(tuple, problems))
 
-    gates = set(gates)
-    m = defaultdict(list)
-    for a, b, c in paths:
-        m[a].append((c, b))
-        m[b].append((c, a))
-    return low_way()
+    def check(a, c):
+        for p in problems:
+            if not (p[0] <= a and p[1] <= c):
+                return False
+        return True
 
-print(solution(6, [[1, 2, 3], [2, 3, 5], [2, 4, 2], [2, 5, 4], [3, 4, 4], [4, 5, 3], [4, 6, 1], [5, 6, 1]], [1, 3], [5]))
+    heap = [(0, alp, cop)]
+    while heap:
+        t, now_alp, now_cop = heapq.heappop(heap)
+        if check(now_alp, now_cop):
+            return t
+        heapq.heappush(heap, (t+1, now_alp+1, now_cop))
+        heapq.heappush(heap, (t+1, now_alp, now_cop+1))
+        for p in problems:
+            if now_alp <= p[0] and now_cop <= p[1]:
+                heapq.heappush(heap, (t+p[4], now_alp+p[2], now_cop+p[3]))
+
 print(solution(
-    7,
-    [[1, 4, 4], [1, 6, 1], [1, 7, 3], [2, 5, 2], [3, 7, 4], [5, 6, 6]],
-    [1],
-    [2, 3, 4]
-
+    10, 10,
+    [[10,15,2,1,2],[20,20,3,3,4]]
 ))
