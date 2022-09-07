@@ -1,88 +1,35 @@
+from typing import Tuple
+moves = [(0, 1), (-1, 0), (1, 0), (0, -1)]
 
+def game(board, aloc, bloc,)-> Tuple[bool, int]:
+    game_results = []
+
+    if board[bloc[0]][bloc[1]] == 0:
+        return True, 0
+    if board[aloc[0]][aloc[1]] == 0:
+        return False, 0
+
+    for move in moves:
+        next_aloc = (aloc[0]+move[0], aloc[1]+move[1])
+        try:
+            if next_aloc[0] < 0 or next_aloc[1] < 0 :
+                raise IndexError
+            next_board = board[next_aloc[0]][next_aloc[1]]
+        except IndexError:
+            continue
+
+        if next_board == 1:
+            board[aloc[0]][aloc[1]] = 0
+            win, game_length = game(board, bloc, next_aloc)
+            board[aloc[0]][aloc[1]] = 1
+            game_results.append((not win, game_length+1))
+
+    if len(game_results) == 0:
+        return False, 0 # 움직일 곳이 없으므로 패배
+    elif any(r[0] for r in game_results):
+        return True, min(r[1] for r in game_results if r[0]) # 이길 수 있다면 가장 빨리 이기는 쪽으로
+    else:
+        return False, max(r[1] for r in game_results) # 이길 수 없다면 가장 오래 버티는 쪽으로
 
 def solution(board, aloc, bloc):
-    no_board = set()
-    for i in range(len(board)):
-        for j in range(len(board[0])):
-            if board[i][j] == 0:
-                no_board.add((i, j))
-    a_move = 0
-    b_move = 0
-    
-    def a_moving():
-        nonlocal a_move
-        dist = float('inf')
-        ret = None
-        dx = [0, 0, -1, 1]
-        dy = [-1, 1, 0, 0]
-        can = list()
-        for x, y in zip(dx, dy):
-            nx = aloc[0] + x
-            ny = aloc[1] + y
-            if 0 <= nx < len(board) and 0 <= ny < len(board[0]) and (nx, ny) not in no_board:
-                can.append((nx, ny))
-        if not can:
-            return True
-        for x, y in can:
-            tmp = (x-bloc[0])**2 + (y-bloc[1])**2
-            if tmp < dist:
-                ret = (x, y)
-                dist = tmp
-            elif tmp == dist:
-                for k, p in no_board:
-                    if (x-k)**2 + (y-p)**2 > (ret[0]-k)**2 + (ret[1]-p)**2:
-                        ret = (x, y)
-                        break
-        no_board.add((aloc[0], aloc[1]))
-        aloc[0] = ret[0]
-        aloc[1] = ret[1]
-        a_move += 1
-        return False
-        
-
-    def b_moving():
-        nonlocal b_move
-        dist = float('-inf')
-        ret = None
-        dx = [0, 0, -1, 1]
-        dy = [-1, 1, 0, 0]
-        can = list()
-        for x, y in zip(dx, dy):
-            nx = bloc[0] + x
-            ny = bloc[1] + y
-            if 0 <= nx < len(board) and 0 <= ny < len(board[0]) and (nx, ny) not in no_board:
-                can.append((nx, ny))
-        if not can:
-            return True
-        for x, y in can:
-            tmp = (x-bloc[0])**2 + (y-bloc[1])**2
-            if tmp > dist:
-                ret = (x, y)
-                dist = tmp
-            elif tmp == dist:
-                for k, p in no_board:
-                    if (x-k)**2 + (y-p)**2 > (ret[0]-k)**2 + (ret[1]-p)**2:
-                        ret = (x, y)
-                        break
-        no_board.add((bloc[0], bloc[1]))
-        bloc[0] = ret[0]
-        bloc[1] = ret[1]
-        b_move += 1
-        return False
-    
-
-    while True:
-        if a_moving():
-            break
-        print(set(bloc))
-        if (bloc[0], bloc[1]) in no_board:
-            break
-        if b_moving():
-            break
-    
-    return a_move + b_move
-
-print(solution(
-    [[1, 1, 1], [1, 1, 1], [1, 1, 1]],
-    [1, 0], [1, 2]
-))
+    return game(board, aloc, bloc)[1]s
