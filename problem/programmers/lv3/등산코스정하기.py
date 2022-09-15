@@ -19,7 +19,7 @@ def solution(n, paths, gates, summits):
                             smallest = tmp
                         elif tmp == answer[1] and f < answer[0]:
                             answer[0] = f
-                    if not visited[next_node] and tmp <= smallest:
+                    if not visited[next_node] and tmp < smallest:
                         heapq.heappush(heap, (tmp, next_node, f))
         return answer
 
