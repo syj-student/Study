@@ -1,3 +1,3 @@
-m = {'a':10}
-if 'a' in m:
-    print(m['a'])
+a = [[1, 2]]
+for i, a in enumerate(a):
+    print(i, a)
