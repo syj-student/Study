@@ -1,25 +1,22 @@
-def solution(n, stations, w):
-    answer = 0
-    repeater = set(map(lambda x: x-1, stations))
-    apt = [False] * n
-    i = 0
-    while i < n:
-        if apt[i] == False:
-            tmp = i+w
-            print(tmp)
-            if tmp not in repeater:
-                answer += 1
-            i = tmp + w + 1
-        else:
-            if i in repeater:
-                i = i+w+1
-            else:
-                i += 1
+from itertools import combinations, permutations
+import re
 
-    return answer
+def solution(user_id, banned_id):
+    answer = set()
+    p = list(map(lambda x: re.compile(x.replace('*', '.')+'$'), banned_id))
+    for case in permutations(user_id, len(banned_id)):
+        for m, u in zip(p, case):
+            if not m.match(u):
+                break
+        else:
+            answer.add(tuple(sorted(case)))
+
+
+    return len(answer)
 
 print(
     solution(
-        16, [9], 2
+        ["frodo", "fradi", "crodo", "abc123", "frodoc"],
+        ["fr*d*", "*rodo", "******", "******"]
     )
 )
