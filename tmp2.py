@@ -1,7 +1,7 @@
-from collections import defaultdict
+import bisect
+from collections import deque
 
-a = defaultdict(int)
-print(len(a))
-a["hello"] = 1
-a["hello"] -= 1
-print(len(a))
+a = deque([0, 2, 2,3])
+print(bisect.bisect_right(a, 2))
+del a[1]
+print(a)
