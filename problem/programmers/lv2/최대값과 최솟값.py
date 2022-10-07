@@ -5,3 +5,6 @@ def solution(s):
         small = min(small, i)
     
     return "{0} {1}".format(small, big)
+
+a = [0, 1]
+print(a[True])
