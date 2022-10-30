@@ -1,12 +1,4 @@
-def good():
-    a = 10
-
-    def bad():
-        nonlocal a
-        print(a)
-        a = 20
-
-    bad()
-    print(a)
-
-good()
+a = set({1, 2})
+b = {1, 2}
+c = {1:""}
+print(a, type(b), c)
