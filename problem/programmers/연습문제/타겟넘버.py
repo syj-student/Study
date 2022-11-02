@@ -11,5 +11,4 @@ def dfs(numbers, target, prev_sum=0, depth=0):
 def solution(numbers, target):
 	return dfs(numbers, target)
 
-
 print(solution([1, 1, 1, 1, 1], 3))
