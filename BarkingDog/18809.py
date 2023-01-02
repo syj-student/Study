@@ -28,11 +28,11 @@ for i in combinations(can_start, c+d):
 
         turn = 10
         for x, y in j:
-            copy_map[x][y] = ('G', turn)
+            copy_map[x][y] = ('G', turn-1)
             cases.remove((x, y))
             in_q.add((x, y, 'G', turn))
         for x, y in cases:
-            copy_map[x][y] = ('R', turn)
+            copy_map[x][y] = ('R', turn-1)
             in_q.add((x, y, 'R', turn))
         while in_q:
             tmp = set()
