@@ -22,7 +22,7 @@ type Ele struct {
 
 var (
 	N, M, G, R   int
-	originGarden [][][2]int
+	originGarden [50][50][2]int
 	waterPos     [][2]int
 	Nothing      void
 	dx           = [4]int{0, -1, 0, 1}
@@ -39,13 +39,13 @@ func main() {
 	parseInformation()
 	all_cases := generator(len(waterPos), G+R)
 	for all := range all_cases {
-		green_cases := generator(G+R, G)
+		green_cases := generator(len(*all), G)
 		for green := range green_cases {
 			allCopy := make([]int, len(*all))
 			copy(allCopy, *all)
 			greenCopy := make([]int, len(*green))
 			copy(greenCopy, *green)
-			go bLogic(allCopy, greenCopy, deepcopy(originGarden))
+			go bLogic(allCopy, greenCopy, originGarden)
 		}
 	}
 	wg.Done()
@@ -53,18 +53,18 @@ func main() {
 	fmt.Println(answer.val)
 }
 
-func deepcopy(origin [][][2]int) [][][2]int {
-	ret := [][][2]int{}
-	for i := 0; i < len(origin); i++ {
-		iLine := make([][2]int, len(origin[0]))
-		ret = append(ret, iLine)
-		for j := 0; j < len(origin[0]); j++ {
-			iLine[j][0] = origin[i][j][0]
-			iLine[j][1] = origin[i][j][1]
-		}
-	}
-	return ret
-}
+// func deepcopy(origin [][][2]int) [][][2]int {
+// 	ret := [][][2]int{}
+// 	for i := 0; i < len(origin); i++ {
+// 		iLine := make([][2]int, len(origin[0]))
+// 		ret = append(ret, iLine)
+// 		for j := 0; j < len(origin[0]); j++ {
+// 			iLine[j][0] = origin[i][j][0]
+// 			iLine[j][1] = origin[i][j][1]
+// 		}
+// 	}
+// 	return ret
+// }
 
 func generator(part int, cnt int) <-chan *[]int {
 	channel := make(chan *[]int)
@@ -89,7 +89,7 @@ func generator(part int, cnt int) <-chan *[]int {
 	return channel
 }
 
-func bLogic(all_pos []int, green_pos []int, board [][][2]int) {
+func bLogic(all_pos []int, green_pos []int, board [50][50][2]int) {
 	wg.Add(1)
 	q := map[Ele]void{}
 	// fmt.Println(all_pos, green_pos, waterPos)
@@ -126,7 +126,7 @@ func bLogic(all_pos []int, green_pos []int, board [][][2]int) {
 			for i := 0; i < 4; i++ {
 				nx := dx[i] + k.x
 				ny := dy[i] + k.y
-				if 0 <= nx && nx < len(board) && 0 <= ny && ny < len(board[0]) && board[nx][ny][0] != 0 {
+				if 0 <= nx && nx < N && 0 <= ny && ny < M && board[nx][ny][0] != 0 {
 					if board[nx][ny][0] == 1 || board[nx][ny][0] == 2 {
 						board[nx][ny][0] = int(k.color)
 						board[nx][ny][1] = now_day
@@ -168,7 +168,6 @@ func bLogic(all_pos []int, green_pos []int, board [][][2]int) {
 							now_answer++
 							board[nx][ny][0] = 0
 						}
-						continue
 					}
 				}
 			}
@@ -188,10 +187,6 @@ func parseInformation() {
 	fmt.Fscan(r, &N, &M, &G, &R)
 	if R < G {
 		G, R = R, G
-	}
-	originGarden = make([][][2]int, N)
-	for i := 0; i < N; i++ {
-		originGarden[i] = make([][2]int, M)
 	}
 	for y := 0; y < N; y++ {
 		for x := 0; x < M; x++ {
