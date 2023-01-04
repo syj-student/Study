@@ -1,81 +1,36 @@
-from itertools import combinations
-from collections import deque
-import sys
-import copy
+# n : 데이터의 크기
+n = int(input())
 
-dx = [-1, 1, 0, 0]
-dy = [0, 0, -1, 1]
-checker = True
+# plus : 양수 데이터 리스트, minus : 음수 데이터 리스트
+plus = []
+minus = []
 
-def bfs(array, selected, green):
-    global checker
-    cnt = 0
-    green_q = deque()
-    red_q = deque()
+result = 0
+for i in range(n):
+    num = int(input())
+    if num > 1:
+        plus.append(num)
+    elif num <= 0:
+        minus.append(num)
+    else:
+        result += num
 
-    for row, col in selected:
-        if [row, col] in green:
-            green_q.append([row, col])  # 초록색 배양액
-            array[row][col] = 3
-        else:
-            red_q.append([row, col])  # 빨간색 배양액
-            array[row][col] = 4
+# 정렬
+plus.sort(reverse=True)
+minus.sort() # ex) -3 -2 -1 
 
-    while green_q:  # 초록색 배양액이 빌때까지
-        green_temp = set()
-        red_temp = set()
-        while green_q:
-            x, y = green_q.popleft()
-            array[x][y] = 3
-            for i in range(4):
-                new_x, new_y = x + dx[i], y + dy[i]
-                if 0 <= new_x < n and 0 <= new_y < m:
-                    if array[new_x][new_y] == 1 or array[new_x][new_y] == 2:
-                        green_temp.add((new_x, new_y))
-        while red_q:
-            x, y = red_q.popleft()
-            array[x][y] = 4
-            for i in range(4):
-                new_x, new_y = x + dx[i], y + dy[i]
-                if 0 <= new_x < n and 0 <= new_y < m:
-                    if array[new_x][new_y] == 1 or array[new_x][new_y] == 2:
-                        red_temp.add((new_x, new_y))
+# 양수 묶기
+for i in range(0, len(plus), 2):
+    if i+1 >= len(plus):
+        result += plus[i]
+    else:
+        result += (plus[i] * plus[i+1])
 
-        inter = green_temp & red_temp
-        green_temp = green_temp - inter
-        red_temp = red_temp - inter
-        for row, col in inter:
-            array[row][col] = 5
-            cnt += 1
-        for row, col in green_temp:
-            array[row][col] = 3
-        for row, col in red_temp:
-            array[row][col] = 4
-        green_q.extend(green_temp)
-        red_q.extend(red_temp)
-    if cnt == 9 and checker:
-        print(*array, sep='\n')
-        checker = False
-    return cnt
+# 음수 묶기
+for i in range(0, len(minus), 2):
+    if i+1 >= len(minus):
+        result += minus[i]
+    else:
+        result += (minus[i] * minus[i+1])
 
-
-if __name__ == "__main__":
-    n, m, g, r = map(int, sys.stdin.readline().split())
-    maps = [list(map(int, sys.stdin.readline().split())) for _ in range(n)]
-
-    # 배양액을 뿌릴 수 있는 위치, 뿌릴 수 없는 위치 탐색
-    location = []
-    for i in range(n):
-        for j in range(m):
-            if maps[i][j] == 2:
-                location.append([i, j])
-
-    answer = 0
-    for selected in list(combinations(location, g + r)):
-        # selected를 green과 red로 나누기
-        for green in list(combinations(selected, g)):
-            copy_maps = copy.deepcopy(maps)
-            answer = max(answer, bfs(copy_maps, selected, green))
-
-    # 출력
-    print(answer)
+print(result)
