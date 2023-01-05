@@ -3,15 +3,16 @@ from sys import stdin
 input = stdin.readline
 
 n, p = list(), list()
+answer = 0
 
 for i in range(int(input())):
     x = int(input())
     if x <= 0:
         n.append(x)
-    elif x > 0:
+    elif x > 1:
         p.append(x)
-
-answer, checker = 0, set()
+    else:
+        answer += 1
 
 n.sort()
 p.sort(reverse=True)
