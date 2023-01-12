@@ -1,3 +1,4 @@
-x = 0
-x = eval("[1, 2, 3]")
-print(type(x))
+a = [1, 2, 1, 2]
+answer = 0
+for i in range(4):
+    a
