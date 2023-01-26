@@ -1,1 +1,1 @@
-/home/yusong/Desktop/problems/rust/target/debug/problems: /home/yusong/Desktop/problems/rust/src/components/mod.rs /home/yusong/Desktop/problems/rust/src/components/p1000.rs /home/yusong/Desktop/problems/rust/src/main.rs
+/home/yusong/Desktop/problems/rust/target/debug/problems: /home/yusong/Desktop/problems/rust/src/main.rs
