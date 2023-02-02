@@ -11,22 +11,22 @@ answer = 0
 def egg_fight(now=0):
     global eggs, answer, eggs_isbroken
 
-    i_isbroken = now_isbroken = False
-
     if now < len(eggs):
         if eggs[now][0] <= 0:
             egg_fight(now+1)
         else:
+            crash = set()
             for i in range(len(eggs)):
                 if now == i or i in eggs_isbroken:
                     continue
                 eggs[i][0] -= eggs[now][1]
                 eggs[now][0] -= eggs[i][1]
-                prev = eggs_isbroken.copy() 
-                if eggs[i][0] <= 0: eggs_isbroken.add(i)
-                if eggs[now][0] <= 0: eggs_isbroken.add(now)
+                crash.clear()
+                if eggs[i][0] <= 0: crash.add(i)
+                if eggs[now][0] <= 0: crash.add(now)
+                eggs_isbroken.update(crash)
                 egg_fight(now+1)
-                eggs_isbroken = prev
+                eggs_isbroken -= crash
                 eggs[i][0] += eggs[now][1]
                 eggs[now][0] += eggs[i][1]
 
