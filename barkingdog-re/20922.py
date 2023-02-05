@@ -17,6 +17,7 @@ for end, now in enumerate(number):
         while counter[now] > lim:
             counter[number[start]] -= 1; start += 1
     
+    # Check Remain elements count
     if length - start <= answer:
         break
 

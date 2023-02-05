@@ -1,8 +1,5 @@
-a = ['1', '2']
-b = map(int, a)
-for c in b:
-    print(c)
+from itertools import product
 
-print(b)
-for c in b:
-    print(c)
+a = [1, 2]
+b = [3, 4]
+print(*list(product(a, b)), sep="\n")
