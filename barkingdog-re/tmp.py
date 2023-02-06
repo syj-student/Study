@@ -1,5 +1,8 @@
-from itertools import product
+from sys import stdin
 
-a = [1, 2]
-b = [3, 4]
-print(*list(product(a, b)), sep="\n")
+input = stdin.readline
+
+n = int(input())
+info = list(map(int, input().split()))
+info.sort()
+
