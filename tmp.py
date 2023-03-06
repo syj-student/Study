@@ -1,4 +1,4 @@
-a = [1, 2]
-b = [3, 4, 5]
-for i, x in zip(enumerate(a), b):
-    print(i, x)
+x = 64
+while x > 0:
+    print(format(x, 'b'))
+    x //= 2
