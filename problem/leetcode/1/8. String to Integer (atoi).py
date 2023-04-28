@@ -9,7 +9,7 @@ class Solution:
 			if s[i] == '-':
 				sign *= -1
 			i += 1
-		while i < len(s) and s[i].isnumeric():
+		while i < len(s) and s[i].isdigit():
 			tmp += s[i]
 			i += 1
 		if tmp:

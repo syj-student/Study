@@ -1,4 +1,3 @@
-x = 64
-while x > 0:
-    print(format(x, 'b'))
-    x //= 2
+from datetime import datetime
+
+print(datetime.now().timestamp())
